@@ -1,6 +1,6 @@
-package com.urlshortener.controller;
+package com.example.backend.controller;
 
-import com.urlshortener.service.UrlService;
+import com.example.backend.service.UrlService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

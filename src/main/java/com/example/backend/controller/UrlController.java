@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
-import com.urlshortener.dto.*;
-import com.urlshortener.service.UrlService;
+import com.example.backend.dto.*;
+import com.example.backend.service.UrlService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

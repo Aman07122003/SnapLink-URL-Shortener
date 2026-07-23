@@ -1,4 +1,4 @@
-package com.urlshortener.service;
+package com.example.backend.service;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;

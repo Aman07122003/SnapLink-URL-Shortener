@@ -1,10 +1,10 @@
 package com.example.backend.service;
 
-import com.urlshortener.dto.*;
-import com.urlshortener.entity.ClickEvent;
-import com.urlshortener.entity.Url;
-import com.urlshortener.repository.ClickEventRepository;
-import com.urlshortener.repository.UrlRepository;
+import com.example.backend.dto.*;
+import com.example.backend.entity.ClickEvent;
+import com.example.backend.entity.Url;
+import com.example.backend.repository.ClickEventRepository;
+import com.example.backend.repository.UrlRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
