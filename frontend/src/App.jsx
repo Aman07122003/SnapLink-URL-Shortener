@@ -7,7 +7,7 @@ function App() {
         </h1>
 
         <p className="mt-4 text-gray-600">
-          Your React + Vite + Tailwind setup is ready.
+          Your React + Vite + Tailwind setup is ready
         </p>
 
         <button className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
