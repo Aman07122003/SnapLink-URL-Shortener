@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Search, Loader2, AlertCircle } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Input } from './ui/input.tsx';
 import { Button } from '@/components/ui/button';
 import { api } from '@/services/api';
 import UrlCard from './UrlCard';
