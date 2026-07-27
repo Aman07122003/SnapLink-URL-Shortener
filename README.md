@@ -323,7 +323,7 @@ For production, replace H2 with PostgreSQL or MySQL, configure a public `app.url
 
 ## Repository
 
-GitHub: [imrajeevnayan/url-shortener-springboot](https://github.com/imrajeevnayan/url-shortener-springboot)
+GitHub: [Aman07122003/SnapLink](https://github.com/Aman07122003)
 
 ## License
 
