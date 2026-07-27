@@ -1,6 +1,6 @@
-# URL Shortener Spring Boot React - Full Stack URL Shortening App
+# SnapLink - Full Stack URL Shortening App
 
-![URL Shortener dashboard built with Spring Boot and React](./dashboard.png)
+![SnapLink dashboard built with Spring Boot and React](./dashboard.png)
 
 A full stack URL shortener application built with **Spring Boot 3**, **React**, **TypeScript**, **Vite**, **Tailwind CSS**, **Spring Data JPA**, and **H2 Database**. This project demonstrates how to build a modern Bitly-style short link platform with custom aliases, QR codes, click analytics, URL management, expiration dates, and a responsive dashboard.
 
