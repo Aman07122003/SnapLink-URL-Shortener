@@ -1,16 +1,15 @@
 import { useState, useCallback } from 'react';
 import Navbar from './../components/Navbar';
-import ShortenForm from '@/components/ShortenForm';
-import DashboardStats from '@/components/DashboardStats';
-import UrlList from '@/components/UrlList';
-import type { UrlResponse } from '@/types';
+import ShortenForm from './../components/ShortenForm';
+import DashboardStats from '../components/DashboardStats';
+import UrlList from './../components/UrlList';
 
 export default function Home() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleUrlCreated = useCallback((_url: UrlResponse) => {
-    setRefreshKey((prev) => prev + 1);
-  }, []);
+  const handleUrlCreated = useCallback(() => {
+  setRefreshKey((prev) => prev + 1);
+}, []);
 
   return (
     <div className="min-h-screen bg-slate-50">
