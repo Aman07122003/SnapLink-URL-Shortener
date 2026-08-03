@@ -1,5 +1,5 @@
 import { Link2, MousePointerClick, Activity, Globe } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 import { api } from '../services/api.ts';
 import type { DashboardStats as DashboardStatsType } from '../types';
 
@@ -7,22 +7,23 @@ export default function DashboardStats() {
   const [stats, setStats] = useState<DashboardStatsType | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadStats();
-  }, []);
+  const loadStats = useCallback(async () => {
+  try {
+    const response = await api.getDashboardStats();
 
-  const loadStats = async () => {
-    try {
-      const response = await api.getDashboardStats();
-      if (response.success) {
-        setStats(response.data);
-      }
-    } catch (err) {
-      console.error('Failed to load stats:', err);
-    } finally {
-      setLoading(false);
+    if (response.success) {
+      setStats(response.data);
     }
-  };
+  } catch (err: unknown) {
+    console.error("Failed to load stats:", err);
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
+useEffect(() => {
+  void loadStats();
+}, [loadStats]);
 
   const statCards = [
     {

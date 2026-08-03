@@ -19,9 +19,18 @@ export default function BackendStatus() {
 };
 
 useEffect(() => {
-  checkHealth();
-  const interval = setInterval(checkHealth, 30000);
-  return () => clearInterval(interval);
+  const timer = setTimeout(() => {
+    void checkHealth();
+  }, 0);
+
+  const interval = setInterval(() => {
+    void checkHealth();
+  }, 30000);
+
+  return () => {
+    clearTimeout(timer);
+    clearInterval(interval);
+  };
 }, []);
 
   if (isOnline === true) {
