@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback ,useEffect, useState } from 'react';
 import { X, TrendingUp, Users, Globe, Monitor, Smartphone, Tablet, MousePointerClick } from 'lucide-react';
 import { Button } from './ui/button.tsx';
 import { api } from '../services/api.ts';
@@ -29,30 +29,32 @@ export default function AnalyticsPanel({ urlId, onClose }: AnalyticsPanelProps) 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    loadAnalytics();
-  }, [urlId]);
+  const loadAnalytics = useCallback(async () => {
+  setLoading(true);
+  setError("");
 
-  const loadAnalytics = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await api.getAnalytics(urlId);
-      if (response.success) {
-        setAnalytics(response.data);
-      } else {
-        setError(response.message);
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Failed to load analytics');
-      }
-    } finally {
-      setLoading(false);
+  try {
+    const response = await api.getAnalytics(urlId);
+
+    if (response.success) {
+      setAnalytics(response.data);
+    } else {
+      setError(response.message);
     }
-  };
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      setError(err.message);
+    } else {
+      setError("Failed to load analytics");
+    }
+  } finally {
+    setLoading(false);
+  }
+}, [urlId]);
+
+useEffect(() => {
+  void loadAnalytics();
+}, [loadAnalytics]);
 
   const StatRow = ({ label, count, percentage, icon: Icon }: { label: string; count: number; percentage: number; icon?: React.ElementType }) => (
     <div className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">

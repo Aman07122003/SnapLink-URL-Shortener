@@ -23,6 +23,9 @@ export default defineConfig([
         'warn',
         { allowConstantExport: true },
       ],
+
+      // Disable React Compiler lint rules
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ])

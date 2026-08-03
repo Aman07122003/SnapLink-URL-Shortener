@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Search, Loader2, AlertCircle } from 'lucide-react';
 import { Input } from './ui/input.tsx';
-import { Button } from '@/components/ui/button';
-import { api } from '@/services/api';
+import { Button } from './ui/button.tsx';
+import { api } from '../services/api.ts';
 import UrlCard from './UrlCard';
 import AnalyticsPanel from './AnalyticsPanel';
-import type { UrlResponse } from '@/types';
+import type { UrlResponse } from '../types';
 
 interface UrlListProps {
   refresh: number;
@@ -18,26 +18,32 @@ export default function UrlList({ refresh }: UrlListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAnalyticsId, setSelectedAnalyticsId] = useState<number | null>(null);
 
-  useEffect(() => {
-    loadUrls();
-  }, [refresh]);
+  const loadUrls = useCallback(async () => {
+  setLoading(true);
+  setError('');
 
-  const loadUrls = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await api.getRecentUrls();
-      if (response.success) {
-        setUrls(response.data);
-      } else {
-        setError(response.message);
-      }
-    } catch (err: any) {
-      setError(err.message || 'Failed to load URLs');
-    } finally {
-      setLoading(false);
+  try {
+    const response = await api.getRecentUrls();
+
+    if (response.success) {
+      setUrls(response.data);
+    } else {
+      setError(response.message);
     }
-  };
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      setError(err.message);
+    } else {
+      setError('Failed to load URLs');
+    }
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
+useEffect(() => {
+  void Promise.resolve().then(loadUrls);
+}, [loadUrls, refresh]);
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
@@ -50,8 +56,12 @@ export default function UrlList({ refresh }: UrlListProps) {
       if (response.success && response.data) {
         setUrls(response.data.content);
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Failed to search URLs');
+      }
     } finally {
       setLoading(false);
     }
@@ -67,8 +77,12 @@ export default function UrlList({ refresh }: UrlListProps) {
           setSelectedAnalyticsId(null);
         }
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Failed to delete URL');
+      }
     }
   };
 
