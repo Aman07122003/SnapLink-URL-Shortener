@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Copy, Check, ExternalLink, BarChart3, QrCode, Trash2, Calendar, MousePointerClick, Lock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import type { UrlResponse } from '@/types';
+import { Button } from './ui/button.tsx';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog.tsx';
+import type { UrlResponse } from '../types';
 
 interface UrlCardProps {
   url: UrlResponse;
@@ -16,20 +16,20 @@ export default function UrlCard({ url, onViewAnalytics, onDelete }: UrlCardProps
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(url.shortUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      // Fallback
-      const textarea = document.createElement('textarea');
-      textarea.value = url.shortUrl;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+    await navigator.clipboard.writeText(url.shortUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  } catch {
+    // Fallback
+    const textarea = document.createElement('textarea');
+    textarea.value = url.shortUrl;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
   };
 
   const formatDate = (dateStr: string | null) => {
