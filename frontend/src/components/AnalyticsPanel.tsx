@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { X, TrendingUp, Users, Globe, Monitor, Smartphone, Tablet, MousePointerClick } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { api } from '@/services/api';
-import type { AnalyticsDto, StatItem } from '@/types';
+import { Button } from './ui/button.tsx';
+import { api } from '../services/api.ts';
+import type { AnalyticsDto, StatItem } from '../types';
 import {
   BarChart,
   Bar,
@@ -43,8 +43,12 @@ export default function AnalyticsPanel({ urlId, onClose }: AnalyticsPanelProps) 
       } else {
         setError(response.message);
       }
-    } catch (err: any) {
-      setError(err.message || 'Failed to load analytics');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Failed to load analytics');
+      }
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import { Link2, MousePointerClick, Activity, Globe } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { api } from '@/services/api';
-import type { DashboardStats as DashboardStatsType } from '@/types';
+import { api } from '../services/api.ts';
+import type { DashboardStats as DashboardStatsType } from '../types';
 
 export default function DashboardStats() {
   const [stats, setStats] = useState<DashboardStatsType | null>(null);

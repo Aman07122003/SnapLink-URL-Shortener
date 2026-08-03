@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link2, Loader2, Check, ChevronDown, ChevronUp, Sparkles, Lock, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent } from '@/components/ui/card';
-import { api } from '@/services/api';
-import type { UrlResponse, UrlRequest } from '@/types';
+import { Button } from './ui/button.tsx';
+import { Input } from './ui/input.tsx';
+import { Label } from './ui/label.tsx';
+import { Card, CardContent } from './ui/card.tsx';
+import { api } from '../services/api.ts';
+import type { UrlResponse, UrlRequest } from '../types';
 
 interface ShortenFormProps {
   onSuccess: (url: UrlResponse) => void;
@@ -59,9 +59,11 @@ export default function ShortenForm({ onSuccess }: ShortenFormProps) {
       } else {
         setError(response.message || 'Failed to shorten URL');
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
-    } finally {
+    } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.log(err.message);
+    }
+  } finally {
       setIsLoading(false);
     }
   };
