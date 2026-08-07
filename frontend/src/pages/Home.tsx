@@ -33,23 +33,11 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-lg font-bold text-slate-900">SnapLink</h3>
-              <p className="text-sm text-slate-500">
-                Fast, secure URL shortening built with Spring Boot & React.
-              </p>
-            </div>
+      <footer className="bg-white border-t
 
             <p className="text-sm text-slate-600">
               Crafted with ❤️ by{" "}
-              <span className="font-semibold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                Aman Pratap Singh
-              </span>
-            </p>
-
+              <span className="font-semib
             <div className="flex items-center gap-6 text-sm text-slate-500">
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green-500" />
